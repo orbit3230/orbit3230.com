@@ -1,9 +1,16 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1.0"> 
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1.0">
     <title>KSH - Introduce</title>
+    <!-- 구글 Roboto 폰트 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
     <style>
         /* 실질적인 내용 페이지 뒷 배경 부분 */
         body {
@@ -12,12 +19,15 @@
             background-repeat: no-repeat;
             background-attachment: fixed;
         }
-        
+
         /* 페이지 내용을 담은 컨테이너 */
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
+            /* 사진이 float라서 내용물이 없으면 컨테이너에 담기질 않는 문제 해결을 위해 */
+            /* 사실 overflow의 특성을 이용한게 아니라서 auto든 hidden이든 상관 없음 */
+            overflow: auto;
             background-color: rgba(255, 255, 255, 0.85);
             border-radius: 10px;
             box-shadow: 0 0 10px white;
@@ -27,18 +37,20 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;  /* 혹시나 화면이 극도로 작아지는 경우를 대비함. 줄바꿈 */
+            flex-wrap: wrap;
+            /* 혹시나 화면이 극도로 작아지는 경우를 대비함. 줄바꿈 */
+            font-family: 'Roboto', sans-serif;
         }
 
         /* KSH 태그 - 홈 버튼 스타일 */
-        .navigation_bar > #KSH {
+        .navigation_bar>#KSH {
             /* clamp(최소값, 현재값, 최대값) - 경계를 설정하여 너무 커지거나 작아지는 문제 해결 */
             font-size: clamp(1.5rem, 5vw, 3rem);
             font-weight: bold;
             margin-bottom: 10px;
             text-shadow: 0 0 2px black;
         }
-        
+
         /* 메뉴 태그 스타일 */
         .navigation_bar .menu {
             display: flex;
@@ -50,94 +62,157 @@
             border-radius: 10px;
             border: 1px solid rgba(128, 128, 128, 0.5);
             box-shadow: 0 0 10px rgba(128, 128, 128, 0.5);
-            background: linear-gradient(to right, lightcyan, lightyellow, aliceblue); /* 메뉴 전체에 그라데이션 배경 설정 */
+            background: linear-gradient(to right, lightcyan, lightyellow, aliceblue);
+            /* 메뉴 전체에 그라데이션 배경 설정 */
         }
+
         .navigation_bar .menu #information {
             background-color: lightcyan;
             padding: 1vw;
-            border-radius: 10px 0 0 10px;  /* 좌측 상단/하단 모서리 처리 */
+            border-radius: 10px 0 0 10px;
+            /* 좌측 상단/하단 모서리 처리 */
         }
+
         .navigation_bar .menu #interest {
             background-color: lightyellow;
             padding: 1vw;
         }
+
         .navigation_bar .menu #contact {
             background-color: aliceblue;
             padding: 1vw;
-            border-radius: 0 10px 10px 0;  /* 우측 상단/h하단 모서리 처리 */
+            border-radius: 0 10px 10px 0;
+            /* 우측 상단/h하단 모서리 처리 */
         }
 
         .navigation_bar #KSH {
-            cursor: pointer; /* 마우스 커서를 링크를 누르는 것처럼 변경 */
-            transition: all 0.3s ease; /* 모든 속성이 0.3초 동안 부드럽게 변화 */
+            cursor: pointer;
+            /* 마우스 커서를 링크를 누르는 것처럼 변경 */
+            transition: all 0.3s ease;
+            /* 모든 속성이 0.3초 동안 부드럽게 변화 */
             font-style: italic;
         }
 
         .navigation_bar #KSH:hover {
-            text-shadow: 0 0 5px gray; /* 글자에 그림자 효과 - 누르는 느낌 */
+            text-shadow: 0 0 5px gray;
+            /* 글자에 그림자 효과 - 누르는 느낌 */
             color: black;
-            transform: scale(1.1); /* 글자 크기를 1.1배로 확대 */
+            transform: scale(1.1);
+            /* 글자 크기를 1.1배로 확대 */
         }
 
         .navigation_bar .menu span {
-            cursor: pointer; /* 마우스 커서를 링크를 누르는 것처럼 변경 */
-            transition: all 0.3s ease; /* 모든 속성이 0.3초 동안 부드럽게 변화 */
+            cursor: pointer;
+            /* 마우스 커서를 링크를 누르는 것처럼 변경 */
+            transition: all 0.3s ease;
+            /* 모든 속성이 0.3초 동안 부드럽게 변화 */
         }
 
         .navigation_bar .menu span:hover {
-            text-shadow: 0 0 3px gray; /* 글자에 그림자 효과 - 누르는 느낌 */
+            text-shadow: 0 0 3px gray;
+            /* 글자에 그림자 효과 - 누르는 느낌 */
             color: black;
-            transform: scale(1.1); /* 글자 크기를 1.1배로 확대 */
+            transform: scale(1.1);
+            /* 글자 크기를 1.1배로 확대 */
+        }
+
+        /* 이미지와 우측 짧은 소개를 담은 intro-container 태그 스타일 */
+        .intro-container {
+            font-size: clamp(0.7rem, 2vw, 1.3rem);
+            display: flex;
+            align-items: start;
+            font-family: 'Noto Sans KR', sans-serif;
         }
 
         /* 이미지 태그 스타일 */
         img {
-            margin-bottom: 10px;
+            float: left;
+            margin-right: 20px;
             width: clamp(100px, 20vw, 300px);
             height: auto;
+        }
+
+        /* 내용이 담기는 description 태그 스타일 */
+        #description {
+            font-size: clamp(0.7rem, 2vw, 1.3rem);
+            font-family: 'Noto Sans KR', sans-serif;
+            text-align: center;
+        }
+
+        /* 목록 헤드 숨기기 */
+        #description ul, ol{
+            list-style-type: none;
+            padding-left: 0;
+            display: inline-block;
+        }
+
+        /* 이미지 아이콘(Contact 에서 사용) 크기 및 위치 조절 */
+        .icon {
+            height: 1em;
+            width: auto;
+        }
+
+        /* 인라인 이미지 아이콘 */
+        .inline-image {
+            display: inline-block;
         }
 
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             // 기본 페이지는 home.html로 설정. 처음에만 보여질 페이지
-            $('#location').load('home.html');
+            $('#short-intro').load('home_intro.html');
+            $('#description').load('home_description.html');
             // load() 함수를 이용하면 파일을 불러와 텍스트로 삽입할 수 있다 !!
-            $('#KSH').click(function() {
-                $('#location').load('information.html');
+            $('#KSH').click(function () {
+                $('#short-intro').load('home_intro.html');
+                $('#description').load('home_description.html');
             });
-        
-            $('#information').click(function() {
-                $('#location').load('information.html');
+
+            $('#information').click(function () {
+                $('#short-intro').load('information_intro.html');
+                $('#description').load('information_description.html');
             });
-        
-            $('#interest').click(function() {
-                $('#location').load('interest.html');
+
+            $('#interest').click(function () {
+                $('#short-intro').load('interest_intro.html');
+                $('#description').load('interest_description.html');
             });
-        
-            $('#contact').click(function() {
-                $('#location').load('contact.html');
+
+            $('#contact').click(function () {
+                $('#short-intro').load('contact_intro.html');
+                $('#description').load('contact_description.html');
             });
         });
     </script>
 </head>
+
 <body>
     <div class="container">
         <div class="navigation_bar">
-            <div id = "KSH">KSH.</div>
+            <div id="KSH">KSH.</div>
             <div class="menu">
                 <span id="information">INFORMATION</span>
                 <span id="interest">INTEREST</span>
                 <span id="contact">CONTACT</span>
             </div>
         </div>
-        <img src="https://i.imgur.com/mC3UYzv.png">
-        <div id="location">
-        <!-- 페이지(메뉴) 별 내용들이 들어갈 곳 -->
-        <!-- 내용들은, html 파일로 작성할 것이다. (stored in same directory) -->
-        <!-- 작성한 html 파일 내 페이지 내용들을 JS로 불러올 것이다. -->
+        <div class="intro-container">
+            <img src="https://i.imgur.com/mC3UYzv.png">
+            <div id="short-intro">
+                <!-- 페이지(메뉴) 별 간단한 소개가 들어갈 곳 -->
+                <!-- 내용들은, html 파일로 작성할 것이다. (stored in same directory) -->
+                <!-- 작성한 html 파일 내 페이지 내용들을 JS로 불러올 것이다. -->
+            </div>
+        </div>
+        <div id="description">
+
+            <!-- 페이지(메뉴) 별 내용들이 들어갈 곳 -->
+            <!-- 내용들은, html 파일로 작성할 것이다. (stored in same directory) -->
+            <!-- 작성한 html 파일 내 페이지 내용들을 JS로 불러올 것이다. -->
         </div>
     </div>
 </body>
+
 </html>
