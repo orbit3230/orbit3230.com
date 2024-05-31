@@ -5,60 +5,76 @@
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1.0"> 
     <title>KSH - Introduce</title>
     <style>
+        /* 실질적인 내용 페이지 뒷 배경 부분 */
+        body {
+            background-image: url('https://i.imgur.com/5t5W0tn.jpeg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+        
+        /* 페이지 내용을 담은 컨테이너 */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.85);
+            border-radius: 10px;
+            box-shadow: 0 0 10px white;
+        }
+
         .navigation_bar {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;  /* 혹시나 화면이 극도로 작아지는 경우를 대비함. 줄바꿈 */
         }
 
         /* KSH 태그 - 홈 버튼 스타일 */
         .navigation_bar > #KSH {
-            font-size: 2em;
+            /* clamp(최소값, 현재값, 최대값) - 경계를 설정하여 너무 커지거나 작아지는 문제 해결 */
+            font-size: clamp(1.5rem, 5vw, 3rem);
             font-weight: bold;
             margin-bottom: 10px;
             text-shadow: 0 0 2px black;
         }
-        /* 이미지 태그 스타일 */
-        .navigation_bar img {
-            margin-bottom: 10px;
-        }
         
+        /* 메뉴 태그 스타일 */
         .navigation_bar .menu {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            width: 400px;
+            width: clamp(200px, 50vw, 600px);
+            font-size: clamp(0.6rem, 2vw, 1.2rem);
             font-weight: bold;
             border-radius: 10px;
             border: 1px solid rgba(128, 128, 128, 0.5);
             box-shadow: 0 0 10px rgba(128, 128, 128, 0.5);
             background: linear-gradient(to right, lightcyan, lightyellow, aliceblue); /* 메뉴 전체에 그라데이션 배경 설정 */
         }
-
         .navigation_bar .menu #information {
             background-color: lightcyan;
-            padding: 10px;
-            border-radius: 10px 0 0 10px;
+            padding: 1vw;
+            border-radius: 10px 0 0 10px;  /* 좌측 상단/하단 모서리 처리 */
         }
-
         .navigation_bar .menu #interest {
             background-color: lightyellow;
-            padding: 10px;
+            padding: 1vw;
         }
-
         .navigation_bar .menu #contact {
             background-color: aliceblue;
-            padding: 10px;
-            border-radius: 0 10px 10px 0;
+            padding: 1vw;
+            border-radius: 0 10px 10px 0;  /* 우측 상단/h하단 모서리 처리 */
         }
 
         .navigation_bar #KSH {
             cursor: pointer; /* 마우스 커서를 링크를 누르는 것처럼 변경 */
             transition: all 0.3s ease; /* 모든 속성이 0.3초 동안 부드럽게 변화 */
+            font-style: italic;
         }
 
         .navigation_bar #KSH:hover {
-            text-shadow: 0 0 2px black; /* 글자에 그림자 효과 - 누르는 느낌 */
+            text-shadow: 0 0 5px gray; /* 글자에 그림자 효과 - 누르는 느낌 */
             color: black;
             transform: scale(1.1); /* 글자 크기를 1.1배로 확대 */
         }
@@ -69,52 +85,59 @@
         }
 
         .navigation_bar .menu span:hover {
-            text-shadow: 0 0 2px black; /* 글자에 그림자 효과 - 누르는 느낌 */
+            text-shadow: 0 0 3px gray; /* 글자에 그림자 효과 - 누르는 느낌 */
             color: black;
             transform: scale(1.1); /* 글자 크기를 1.1배로 확대 */
         }
 
+        /* 이미지 태그 스타일 */
+        img {
+            margin-bottom: 10px;
+            width: clamp(100px, 20vw, 300px);
+            height: auto;
+        }
 
     </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        window.onload = function() {
-            var KSH = document.getElementById('KSH');
-            var information = document.getElementById('information');
-            var interest = document.getElementById('interest');
-            var contact = document.getElementById('contact');
-
-            var location = document.getElementById('location');
-
-            KSH.onclick = function() {
-                location.innerHTML = 'information';
-            }
-
-            information.onclick = function() {
-                location.innerHTML = 'information';
-            }
-
-            interest.onclick = function() {
-                location.innerHTML = 'interest';
-            }
-
-            contact.onclick = function() {
-                location.innerHTML = 'contact';
-            }
-        }
+        $(document).ready(function() {
+            // 기본 페이지는 home.html로 설정. 처음에만 보여질 페이지
+            $('#location').load('home.html');
+            // load() 함수를 이용하면 파일을 불러와 텍스트로 삽입할 수 있다 !!
+            $('#KSH').click(function() {
+                $('#location').load('information.html');
+            });
+        
+            $('#information').click(function() {
+                $('#location').load('information.html');
+            });
+        
+            $('#interest').click(function() {
+                $('#location').load('interest.html');
+            });
+        
+            $('#contact').click(function() {
+                $('#location').load('contact.html');
+            });
+        });
     </script>
 </head>
 <body>
-    <div class="navigation_bar">
-        <div id = "KSH">KSH</div>
-        <div class="menu">
-            <span id="information">INFORMATION</span>
-            <span id="interest">INTEREST</span>
-            <span id="contact">CONTACT</span>
+    <div class="container">
+        <div class="navigation_bar">
+            <div id = "KSH">KSH.</div>
+            <div class="menu">
+                <span id="information">INFORMATION</span>
+                <span id="interest">INTEREST</span>
+                <span id="contact">CONTACT</span>
+            </div>
         </div>
-    </div>
-    <img src="https://i.imgur.com/mC3UYzv.png" width="300px" height="300px">
-    <div id="location">
-    <!-- 페이지(메뉴) 별 내용들이 들어갈 곳 -->
+        <img src="https://i.imgur.com/mC3UYzv.png">
+        <div id="location">
+        <!-- 페이지(메뉴) 별 내용들이 들어갈 곳 -->
+        <!-- 내용들은, html 파일로 작성할 것이다. (stored in same directory) -->
+        <!-- 작성한 html 파일 내 페이지 내용들을 JS로 불러올 것이다. -->
+        </div>
     </div>
 </body>
 </html>
